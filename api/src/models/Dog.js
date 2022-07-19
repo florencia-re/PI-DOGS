@@ -16,10 +16,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      origin: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       heightMin: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -42,7 +38,7 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: true,
+        defaultValue: 'https://st3.depositphotos.com/6913282/12698/v/600/depositphotos_126982838-stock-illustration-trail-cats-abstract-animal-footprint.jpg'
       },
       createdInDb: {
         type: DataTypes.BOOLEAN,
