@@ -23,7 +23,6 @@ export default function Cards() {
     return (
         <div>
             {state.length > 0 ? state.map(dog => (
-
                 <div key={dog.id}>
                     <Card
                         name={dog.name}
@@ -33,7 +32,7 @@ export default function Cards() {
                         weightMax={dog.weightMax}
                     />
                 </div>)
-                
+
             ) : <h2>Cargando...</h2>}
         </div>
     )

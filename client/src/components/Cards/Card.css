@@ -1,0 +1,19 @@
+.card {
+  font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.0225em;
+  background-color: #939788;
+  display:inline-flex;
+  position: relative;
+  /* float: inline-start; */
+  text-align: center;
+  width: 30%;
+  justify-content: center;
+  padding: 10px;
+  margin: 20px 20px 20px 20px;
+  color: rgba(43, 40, 40, 0.803);
+}
+
+.img {
+  width: 70%;
+}
