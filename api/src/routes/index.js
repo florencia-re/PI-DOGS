@@ -58,7 +58,7 @@ const getAllDogs = async () => {
       heightMax: e.heightMax,
       weightMin: e.weightMin,
       weightMax: e.weightMax,
-      temperaments: e.temperaments.map((e) => e.name).join(', '),
+      temperaments: e.temperaments.map((e) => e.name).join(", "),
       lifeSpan: e.lifeSpan,
       image: e.image,
       createdInDb: e.createdInDb,
@@ -158,7 +158,6 @@ router.get("/temperaments", async (req, res, next) => {
     let temperamentsJoin = temperaments.join().split(",");
     let temperamentsTrim = temperamentsJoin.map((element) => element.trim());
     let newSet = [...new Set(temperamentsTrim)];
-
     //console.log(newSet);
     newSet.forEach((element) => {
       Temperament.findOrCreate({
