@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getDogs } from "../../redux/actions";
 //import { Link } from "react-router-dom";
 import Card from "./Card";
@@ -24,6 +25,7 @@ export default function Cards() {
         <div>
             {state.length > 0 ? state.map(dog => (
                 <div key={dog.id}>
+                    <Link to='/details' style={{textDecoration: 'none'}} >
                     <Card
                         name={dog.name}
                         image={dog.image}
@@ -31,6 +33,7 @@ export default function Cards() {
                         weightMin={dog.weightMin}
                         weightMax={dog.weightMax}
                     />
+                    </Link>
                 </div>)
 
             ) : <h2>Cargando...</h2>}

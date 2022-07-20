@@ -3,12 +3,12 @@
   font-size: 18px;
   letter-spacing: 0.0225em;
   background-color: #939788;
-  display:inline-flex;
-  position: relative;
+  display: inline-grid;
+  /* position: relative; */
   /* float: inline-start; */
   text-align: center;
   width: 30%;
-  justify-content: center;
+  justify-items: center;
   padding: 10px;
   margin: 20px 20px 20px 20px;
   color: rgba(43, 40, 40, 0.803);
