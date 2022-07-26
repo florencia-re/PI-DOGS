@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getDogs } from "../../redux/actions";
 //import { Link } from "react-router-dom";
 import Card from "./Card";
+import './Cards.css'
 
 
 //useSelector seleccion uno de los estados en el store, para poder tener acceso al state desde este componente
@@ -22,17 +23,17 @@ export default function Cards() {
 
     //en h2 -> componente de error // componente de loading
     return (
-        <div>
+        <div className='wrapper'>
             {state.length > 0 ? state.map(dog => (
                 <div key={dog.id}>
-                    <Link to='/details' style={{textDecoration: 'none'}} >
-                    <Card
-                        name={dog.name}
-                        image={dog.image}
-                        temperaments={dog.temperaments}
-                        weightMin={dog.weightMin}
-                        weightMax={dog.weightMax}
-                    />
+                    <Link to={'/details/' + dog.id} style={{ textDecoration: 'none' }} >
+                        <Card
+                            name={dog.name}
+                            image={dog.image}
+                            temperaments={dog.temperaments}
+                            weightMin={dog.weightMin}
+                            weightMax={dog.weightMax}
+                        />
                     </Link>
                 </div>)
 

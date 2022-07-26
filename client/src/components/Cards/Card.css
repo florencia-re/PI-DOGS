@@ -1,14 +1,10 @@
 .card {
+  
+  background-color: #939788;
+  text-align: center;
   font-family: "Lato", "Helvetica Neue", Arial, sans-serif;
   font-size: 18px;
   letter-spacing: 0.0225em;
-  background-color: #939788;
-  display: inline-grid;
-  /* position: relative; */
-  /* float: inline-start; */
-  text-align: center;
-  width: 30%;
-  justify-items: center;
   padding: 10px;
   margin: 20px 20px 20px 20px;
   color: rgba(43, 40, 40, 0.803);
