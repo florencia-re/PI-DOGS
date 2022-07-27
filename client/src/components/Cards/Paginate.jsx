@@ -7,7 +7,7 @@ export default function Paginate({ dogsPerPage, allDogs, paginate, currentPage, 
     for (let i = 0; i < Math.ceil(allDogs / dogsPerPage); i++) {
         pageNumbers.push(i +1 );
     }
-    console.log(pageNumbers)
+    //console.log(pageNumbers)
 
     const previousPage = () => {
         setCurrentPage(currentPage - 1)

@@ -1,15 +1,16 @@
 import React from 'react';
 import Cards from '../Cards/Cards';
-import NavBar from '../NavBar/SearchBar';
+import NavBar from '../NavBar/NavBar';
+import SearchBar from '../NavBar/SearchBar';
+import Filters from '../NavBar/Filters';
 import './Home.css'
 
-
 export default function Home() {
-
     return (
         <div className='home'>
-            <h1>Doggie App</h1>
             <NavBar />
+            <SearchBar />
+            <Filters />
             <Cards />
         </div>
     )
