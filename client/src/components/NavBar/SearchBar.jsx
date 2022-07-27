@@ -27,7 +27,7 @@ export default function SearchBar() {
             <h3>Search by breed:</h3>
             <input
                 type="text"
-                placeholder="Search 🐶"
+                placeholder="Write a breed 🐶"
                 onChange={e => handleInputChange(e)}
                 onKeyPress={e => e.key === 'Enter' && handleSubmit(e)}
                 value={name}
