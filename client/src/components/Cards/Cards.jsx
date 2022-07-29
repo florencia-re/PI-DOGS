@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDogs } from "../../redux/actions";
+import { getDogs, sortByName, sortByWeight } from "../../redux/actions";
 //import { Link } from "react-router-dom";
 import Card from "./Card";
 import './Cards.css'
@@ -17,44 +17,81 @@ export default function Cards() {
     const dispatch = useDispatch()
     //hago la logica para ya tener todos los datos cuando el estado se renderize, (return)
 
-
     //----  Paginado  ----
     const [currentPage, setCurrentPage] = useState(1);
-    const [dogsPerPage] = useState(9);
+    const [/*order*/, setOrder] = useState('')
+    const [dogsPerPage] = useState(8);
     const lastDog = currentPage * dogsPerPage;
     const firstDog = lastDog - dogsPerPage;
     const currentDogs = allDogs.slice(firstDog, lastDog)
-
-    const paginate = (pageNumber) => {
-        setCurrentPage(pageNumber)
-    }
 
     useEffect(() => {
         dispatch(getDogs())
     }, [dispatch])
     //console.log(state)
 
-    //en h2 -> componente de error // componente de loading
-    return (
-        <div className="container">
-            <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-            <div className='wrapper'>
-                {currentDogs.length > 0 ? currentDogs.map(dog => (
-                    <div key={dog.id}>
-                        <Link to={'/details/' + dog.id} style={{ textDecoration: 'none' }} >
-                            <Card
-                                name={dog.name}
-                                image={dog.image}
-                                temperaments={dog.temperaments}
-                                weightMin={dog.weightMin}
-                                weightMax={dog.weightMax}
-                            />
-                        </Link>
-                    </div>)
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
-                ) : <h2>Cargando...</h2>}
-            </div>
-            <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+    const handlerSortByName = (e) => {
+        dispatch(sortByName(e.target.value))
+        setCurrentPage(1)
+        setOrder(`Order ${e.target.value}`)
+    }
+
+    const handlerSortByWeight = (e) => {
+        e.preventDefault()
+        dispatch(sortByWeight(e.target.value))
+        setCurrentPage(1)
+        //seteo el estado para q se vuelva a renderizar con el orden
+        setOrder(`Ordenado ${e.target.value}`)
+    }
+
+    const handlerGetDogs = (e) => {
+        dispatch(getDogs())
+    }
+
+    return (
+        <>
+        <div>
+            <button onClick={(e) => handlerGetDogs(e)}>Charge</button>
         </div>
+
+        <h3>Sort by Name:</h3>
+            <select onChange={(e) => handlerSortByName(e)}>
+                <option value="All">Select</option>
+                <option value='Asc'>Ascending</option>
+                <option value='Desc'>Descending</option>
+            </select>
+
+            <h3>Sort by Weight:</h3>
+            <select onChange={(e) => handlerSortByWeight(e)}>
+                <option value="All">Select</option>
+                <option value='Light'>Lighter to heavier</option>
+                <option value='Des'>Heavier to lighter</option>
+            </select>
+
+            <div className="container">
+                <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+                <div className='wrapper'>
+                    {currentDogs.length > 0 ? currentDogs.map(dog => (
+                        <div key={dog.id}>
+                            <Link to={'/details/' + dog.id} style={{ textDecoration: 'none' }} >
+                                <Card
+                                    name={dog.name}
+                                    image={dog.image}
+                                    temperaments={dog.temperaments}
+                                    weightMin={dog.weightMin}
+                                    weightMax={dog.weightMax}
+                                />
+                            </Link>
+                        </div>)
+
+                    ) : <h2>Cargando...</h2>}
+                </div>
+                <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+            </div>
+        </>
     )
 }

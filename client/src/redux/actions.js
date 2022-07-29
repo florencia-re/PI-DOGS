@@ -1,9 +1,13 @@
 import axios from "axios";
-
-export const GET_DOGS = "getDogs";
-export const GET_DETAILS = "getDetails";
-export const GET_TEMPERAMENTS = "getTemperaments";
-export const FILTER_BY_TEMPS = "filterByTemps";
+import {
+  GET_DOGS,
+  GET_DETAILS,
+  GET_TEMPERAMENTS,
+  FILTER_BY_TEMPS,
+  FILTER_BY_ORIGIN,
+  SORT_BY_WEIGHT,
+  SORT_BY_NAME
+} from "./actionTypes";
 
 export function getDogs(name) {
   return async (dispatch) => {
@@ -55,8 +59,31 @@ export function getTemperaments() {
 }
 
 export function filterByTemps(payload) {
+  //el payload es el value de la option en el select
   return {
     type: FILTER_BY_TEMPS,
     payload,
   };
 }
+
+export function filterByOrigin(payload) {
+  return {
+    type: FILTER_BY_ORIGIN,
+    payload
+  }
+}
+
+export function sortByName(payload){
+  return {
+    type: SORT_BY_NAME,
+    payload
+  }
+}
+
+export function sortByWeight(payload){
+  return {
+    type: SORT_BY_WEIGHT,
+    payload
+  }
+}
+
