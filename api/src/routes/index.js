@@ -25,7 +25,7 @@ const getApiInfo = async () => {
       heightMax: dog.height.metric.split(" - ")[1],
       weightMin: dog.weight.metric.split(" - ")[0],
       weightMax: dog.weight.metric.split(" - ")[1],
-      temperaments: dog.temperament,
+      temperaments: dog.temperament || 'Not found',
       lifeSpan: dog.life_span,
       image: dog.image.url,
     };
@@ -148,11 +148,12 @@ router.post("/dogs", async (req, res, next) => {
 
 router.get("/temperaments", async (req, res, next) => {
   try {
-    const getApiTemperaments = await axios.get(
-      `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
-    );
-    let temperaments = getApiTemperaments.data.map(
-      (results) => results.temperament
+    const getApiTemperaments = await getAllDogs()
+    // await axios.get(
+    //   `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
+    // );
+    let temperaments = getApiTemperaments.map(
+      (results) => results.temperaments
     );
     //.toString();
     let temperamentsJoin = temperaments.join().split(",");
@@ -160,9 +161,11 @@ router.get("/temperaments", async (req, res, next) => {
     let newSet = [...new Set(temperamentsTrim)];
     //console.log(newSet);
     newSet.forEach((element) => {
-      Temperament.findOrCreate({
-        where: { name: element },
-      });
+      if (element !== "") {
+        Temperament.findOrCreate({
+          where: { name: element },
+        });
+      }
     });
     const allTemperaments = await Temperament.findAll();
     res.json(allTemperaments);
