@@ -22,10 +22,20 @@ const getApiInfo = async () => {
       id: dog.id,
       name: dog.name,
       heightMin: dog.height.metric.split(" - ")[0],
-      heightMax: dog.height.metric.split(" - ")[1],
-      weightMin: dog.weight.metric.split(" - ")[0],
-      weightMax: dog.weight.metric.split(" - ")[1],
-      temperaments: dog.temperament || 'Not found',
+      // tomo el indice cero y le realizo una aproximación
+      heightMax: dog.height.metric.split(" - ")[1]
+        ? dog.height.metric.split(" - ")[1]
+        : Math.round(dog.height.metric.split(" - ")[0] * 1.1).toString(),
+      weightMin:
+        dog.weight.metric.split(" - ")[0] !== "NaN"
+          ? dog.weight.metric.split(" - ")[0]
+          : dog.weight.metric.split(" - ")[1]
+          ? Math.round(dog.weight.metric.split(" - ")[1] * 0.6).toString()
+          : "30",
+      weightMax: dog.weight.metric.split(" - ")[1]
+        ? dog.weight.metric.split(" - ")[1]
+        : "39",
+      temperaments: dog.temperament || "Unknown",
       lifeSpan: dog.life_span,
       image: dog.image.url,
     };
@@ -148,7 +158,7 @@ router.post("/dogs", async (req, res, next) => {
 
 router.get("/temperaments", async (req, res, next) => {
   try {
-    const getApiTemperaments = await getAllDogs()
+    const getApiTemperaments = await getAllDogs();
     // await axios.get(
     //   `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
     // );
