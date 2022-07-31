@@ -1,11 +1,11 @@
-.paginado {
+.paginate {
     display: inline-flex;
     /* justify-content: center; */
     list-style-type: none;
     margin-right: 40px;
   }
 
-.paginado li button{
+.paginate li button{
   background: transparent;
   border: 1px solid rgba(43, 40, 40, 0.803);
   border-radius: 6px;
@@ -17,25 +17,31 @@
   font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
 }
 
-.paginado li button:hover{
+.paginate li button:hover{
   color: #ddd;
   background-color: rgba(43, 40, 40, 0.803);
   transition: background-color .4s;
   transform: translateY(-2px);
-  -webkit-transition: background-color .4s;
-  -moz-transition: background-color .4s;
-  -ms-transition: background-color .4s;
-  -o-transition: background-color .4s;
+  
 }
 
-.paginado li button:active {
+.paginate li button:focus{
+  color:#ddd;
+  background-color: #1A1A1A;
+}
+
+/* .paginate li button:active {
   color:#ddd;
   background-color: #1A1A1A;
   box-shadow: none;
   transform: translateY(0);
-}
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+} */
 
-/* .pagination li button:hover:not(.active) {background-color: #ddd;} */
+/* .paginate li button:hover:not(:active) {background-color: #ddd;} */
 
 .btn {
   margin: 3px;

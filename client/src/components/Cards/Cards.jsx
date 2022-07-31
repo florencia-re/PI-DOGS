@@ -30,6 +30,10 @@ export default function Cards() {
         dispatch(getDogs())
     }, [dispatch])
     //console.log(state)
+    
+    const handlerGetDogs = (e) => {
+        dispatch(getDogs())
+    }
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -46,10 +50,6 @@ export default function Cards() {
         setCurrentPage(1)
         //seteo el estado para q se vuelva a renderizar con el orden
         setOrder(`Ordenado ${e.target.value}`)
-    }
-
-    const handlerGetDogs = (e) => {
-        dispatch(getDogs())
     }
 
     return (

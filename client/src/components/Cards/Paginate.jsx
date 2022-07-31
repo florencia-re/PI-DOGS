@@ -19,7 +19,7 @@ export default function Paginate({ dogsPerPage, allDogs, paginate, currentPage, 
 
     return (
         <div>
-            <ul className='paginado'>
+            <ul className='paginate'>
                 <button className='btn' onClick={previousPage} disabled={currentPage === 1}>Previous</button>
 
                 {pageNumbers.length > 1 &&
