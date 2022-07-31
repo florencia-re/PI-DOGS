@@ -14,6 +14,7 @@ import './Paginate.css'
 export default function Cards() {
     //pido el estado a redux
     let allDogs = useSelector(state => state.dogs);
+    //let allDoggie = useSelector(state => state.allDogs)
     const dispatch = useDispatch()
     //hago la logica para ya tener todos los datos cuando el estado se renderize, (return)
 
@@ -41,7 +42,6 @@ export default function Cards() {
     }
 
     const handlerSortByWeight = (e) => {
-        e.preventDefault()
         dispatch(sortByWeight(e.target.value))
         setCurrentPage(1)
         //seteo el estado para q se vuelva a renderizar con el orden
@@ -54,22 +54,23 @@ export default function Cards() {
 
     return (
         <>
-        <div>
-            <button onClick={(e) => handlerGetDogs(e)}>Charge</button>
-        </div>
+            <div>
+                <button onClick={(e) => handlerGetDogs(e)}>Charge</button>
+            </div>
 
-        <h3>Sort by Name:</h3>
+            <h3>Sort by Name:</h3>
             <select onChange={(e) => handlerSortByName(e)}>
                 <option value="All">Select</option>
-                <option value='Asc'>Ascending</option>
-                <option value='Desc'>Descending</option>
+                <option value="Asc">A - Z</option>
+                <option value="Desc">Z - A</option>
             </select>
 
             <h3>Sort by Weight:</h3>
+
             <select onChange={(e) => handlerSortByWeight(e)}>
                 <option value="All">Select</option>
-                <option value='Light'>Lighter to heavier</option>
-                <option value='Des'>Heavier to lighter</option>
+                <option value="Light">Lighter to heavier</option>
+                <option value="Heavy">Heavier to lighter</option>
             </select>
 
             <div className="container">

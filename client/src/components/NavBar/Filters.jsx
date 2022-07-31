@@ -29,13 +29,6 @@ export default function Filters() {
 
     return (
         <>
-            <h3>Filter by A - Z and Z - A</h3>
-            <select>
-                <option>Select</option>
-                <option>A - Z</option>
-                <option>Z - A</option>
-            </select>
-
             <h3>Filter by Temperament:</h3>
             <select onChange={(e) => handlerFilterByTemps(e)}>
                 <option value='All'>All</option>
@@ -50,13 +43,12 @@ export default function Filters() {
                 }
             </select>
 
-            <h3>Filter by Origin (Existente or Created):</h3>
+            <h3>Filter by Origin (Existing or Created):</h3>
             <select onChange={(e) => handlerFilterByOrigin(e)}>
                 <option value="All">All</option>
                 <option value="Created">Created</option>
                 <option value='Exists'>Exists</option>
             </select>
-
         </>
     )
 }

@@ -16,7 +16,6 @@ const initialState = {
 };
 
 export default function rootReducer(state = initialState, action) {
-  const allDogs = state.allDogs;
   switch (action.type) {
     case GET_DOGS:
       return {
@@ -35,7 +34,7 @@ export default function rootReducer(state = initialState, action) {
         temperaments: action.payload,
       };
     case FILTER_BY_TEMPS:
-      //   const allDogs = state.allDogs;
+      const allDogs = state.allDogs;
       const filterDogsByTemps =
         action.payload === "All"
           ? allDogs
@@ -47,25 +46,24 @@ export default function rootReducer(state = initialState, action) {
         dogs: filterDogsByTemps,
       };
     case FILTER_BY_ORIGIN:
-      //   const allDoggies = state.allDogs;
+      const allDoggie = state.allDogs;
       const filterDogsByOrigin =
         action.payload === "Created"
-          ? allDogs.filter((dog) => dog.createdInDb)
-          : allDogs.filter((dog) => !dog.createdInDb);
+          ? state.allDogs.filter((dog) => dog.createdInDb)
+          : state.allDogs.filter((dog) => !dog.createdInDb);
       return {
         ...state,
-        dogs: action.payload === "All" ? allDogs : filterDogsByOrigin,
+        dogs: action.payload === "All" ? allDoggie : filterDogsByOrigin,
       };
-
     case SORT_BY_NAME:
       const sortNames =
         action.payload === "Asc" || action.payload === "All"
-          ? allDogs.sort((a, b) => {
+          ? state.allDogs.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
               if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
               return 0;
             })
-          : allDogs.sort((a, b) => {
+          : state.allDogs.sort((a, b) => {
               if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
               if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
               return 0;
@@ -77,8 +75,7 @@ export default function rootReducer(state = initialState, action) {
 
     case SORT_BY_WEIGHT:
       //paso los sting a numero y los comparo
-      const sortWeight =
-        action.payload === "Light"
+      const sortWeight = action.payload === "Light"
           ? state.dogs.sort(function (a, b) {
               return parseInt(a.weightMin) - parseInt(b.weightMin);
             })
@@ -87,7 +84,11 @@ export default function rootReducer(state = initialState, action) {
             });
       return {
         ...state,
-        dogs: sortWeight,
+        dogs: action.payload === 'All' ? state.allDogs.sort((a, b) => {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+          return 0;
+        }): sortWeight 
       };
 
     default:
