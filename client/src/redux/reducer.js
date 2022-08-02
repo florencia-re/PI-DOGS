@@ -6,6 +6,7 @@ import {
   GET_DOGS,
   GET_TEMPERAMENTS,
   SORT_BY_NAME,
+  POST_DOG,
 } from "./actionTypes";
 
 const initialState = {
@@ -75,7 +76,8 @@ export default function rootReducer(state = initialState, action) {
 
     case SORT_BY_WEIGHT:
       //paso los sting a numero y los comparo
-      const sortWeight = action.payload === "Light"
+      const sortWeight =
+        action.payload === "Light"
           ? state.dogs.sort(function (a, b) {
               return parseInt(a.weightMin) - parseInt(b.weightMin);
             })
@@ -84,11 +86,19 @@ export default function rootReducer(state = initialState, action) {
             });
       return {
         ...state,
-        dogs: action.payload === 'All' ? state.allDogs.sort((a, b) => {
-          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-          return 0;
-        }): sortWeight 
+        dogs:
+          action.payload === "All"
+            ? state.allDogs.sort((a, b) => {
+                if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+                if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+                return 0;
+              })
+            : sortWeight,
+      };
+
+    case POST_DOG:
+      return {
+        ...state,
       };
 
     default:

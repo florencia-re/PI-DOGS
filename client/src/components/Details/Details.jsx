@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetails } from "../../redux/actions";
+import {Link} from 'react-router-dom';
 import './Details.css';
 
 export default function Details(props) {
@@ -15,19 +16,21 @@ export default function Details(props) {
     // console.log(dog)
     return (
         <div className='details'>
-            <h2>Doggie Details</h2>
+            
             <div className="card-detail">
+                <h2 className="title-detail">Doggie Details</h2>
             {
-                dog ? <div>
+                dog ? <div className="div-detail">
                     <ul id="card-content">
                         <h3>{dog.name}</h3>
-                        <p>Weight between: {dog.weightMin} kg and {dog.weightMax}</p>
-                        <p>Height between: {dog.heightMin} - {dog.heightMax}</p>
+                        <p>Weight between: {dog.weightMin} kg and {dog.weightMax} kg</p>
+                        <p>Height between: {dog.heightMin} cm and {dog.heightMax} cm</p>
                         <p>Temperaments: {dog.temperaments}</p>
-                        <img className='img' src={dog.image} alt='doggie' />
+                        <img className='img-detail' src={dog.image} alt='doggie' />
+                        <Link to='/home'><p><button>Go back</button></p></Link>
                     </ul>
                 </div>
-                    : 'Doggie no encontrado'}
+                    : 'Doggie not found'}
             </div>
 
         </div>

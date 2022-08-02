@@ -4,8 +4,10 @@ import SearchBar from '../NavBar/SearchBar';
 import './NavBar.css'
 
 export default function NavBar() {
+
     return (
-        <nav><div>
+        <nav>
+            <div>
                 <Link className="a" to='/create' >
                     <button className="btn-nav">Create Dog</button>
                 </Link>

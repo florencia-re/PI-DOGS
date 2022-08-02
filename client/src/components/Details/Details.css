@@ -1,10 +1,10 @@
 .details {
-  position: relative;
+justify-content: center;
   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   /* text-align: center; */
   /* justify-content: center; */background-image: url("../../Images/Diseño\ sin\ título.png");
-  height: 96vh;
+  height: 120vh;
   width: 215vh;
   margin: 0;
   background-size: cover;
@@ -13,24 +13,68 @@
 }
 
 .card-detail {
-  display: grid;
-  grid-template-columns: 1, 1fr;
-  /* justify-content: center; */
-  margin-left: 360px;
+  justify-content: center;
 }
-
 
 #card-content {
   /* margin: 10px; */
-  display: grid;
-  grid-template-rows: 4,1fr;
-  padding-left: 63px;
+  display: contents;
   list-style-type: none;
   position: absolute;
 }
 
-.img {
-  width: 250px;
-  height: 200px;
+.img-detail {
+  width: 400px;
+  height: 300px;
   align-items: center;
+  justify-content: center;
+}
+
+.div-detail {
+  display: inline-block;
+  margin: 20px;
+  border: 2px solid #393939;
+  border-radius: 5px;
+  height: 590px;
+  width: 500px;
+  box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+p button {
+    display: block;
+    width: 60%;
+    margin: 1em auto;
+    height: 2em;
+    text-decoration: none;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
+      Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #ddd;
+    font-size: 1.1rem;
+    background-color: #1a1a1a;
+    border-color: 000000;
+    border-radius: 8px;
+    min-width: 300px;
+    text-decoration: none;
+}
+
+p button:hover {
+  color: #fff;
+  background-color: #1a1a1a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  border: 2px solid #f2f2f2;
+  transform: translateY(-2px);
+  cursor: pointer;
+  
+  -webkit-transform: translateY(-2px);
+  -moz-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  -o-transform: translateY(-2px);
+}
+
+#card-content a {
+  text-decoration: none;
 }

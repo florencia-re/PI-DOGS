@@ -134,7 +134,7 @@ export default function Cards() {
                             </Link>
                         </div>)
 
-                    ) : <h2>Cargando...</h2>}
+                    ) : <h2>Loading...</h2>}
                 </div>
                 <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </div>

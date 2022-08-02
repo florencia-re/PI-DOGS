@@ -6,7 +6,8 @@ import {
   FILTER_BY_TEMPS,
   FILTER_BY_ORIGIN,
   SORT_BY_WEIGHT,
-  SORT_BY_NAME
+  SORT_BY_NAME,
+  //POST_DOG
 } from "./actionTypes";
 
 export function getDogs(name) {
@@ -69,21 +70,36 @@ export function filterByTemps(payload) {
 export function filterByOrigin(payload) {
   return {
     type: FILTER_BY_ORIGIN,
-    payload
-  }
+    payload,
+  };
 }
 
-export function sortByName(payload){
+export function sortByName(payload) {
   return {
     type: SORT_BY_NAME,
-    payload
-  }
+    payload,
+  };
 }
 
-export function sortByWeight(payload){
+export function sortByWeight(payload) {
   return {
     type: SORT_BY_WEIGHT,
-    payload
-  }
+    payload,
+  };
 }
 
+export function postDog(payload) {
+  return async function (dispatch) {
+     const response = await axios.post("http://localhost:3001/dogs", payload);
+     console.log(response)
+     return response 
+  }
+}
+     // return {
+      //   type: POST_DOG,
+      //   json,
+      // };
+    // } catch (error) {
+    //   console.log("Error ocurred");
+    //   //payload({type: ERROR_OCURRED, payload: error.toString()})
+    // }

@@ -11,8 +11,8 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Route exact path="/" render={LandingPage} />
-        <Route path="/home" render={Home} />
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/home" component={Home} />
         <Route path="/details/:id" component={Details} />
         <Route path="/create" component={CreateDog} />
         {/* <Route path="/about" render={About} /> */}
