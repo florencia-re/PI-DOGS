@@ -2,15 +2,16 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { getTemperaments } from '../../redux/actions';
+import './CreateDog.css';
 
 export default function CreateDog() {
 
     const dispatch = useDispatch()
-
+    const temperaments = useSelector(state => state.temperaments)
     useEffect(() => {
         dispatch(getTemperaments())
     }, [dispatch])
-    const temperaments = useSelector(state => state.temperaments)
+
 
     const [dog, setDog] = useState({
         name: "",
@@ -43,8 +44,9 @@ export default function CreateDog() {
 
 
     return (
-        <div>
-            <form onChange={handleSubmit}>
+        <div className='div-form'>
+            <h3>Create a New Doggie!</h3>
+            <form className='form' onChange={handleSubmit}>
                 <label>Name</label>
                 <input name='name' value={dog.name} onChange={handleChange}></input>
                 <label>Height Min</label>
@@ -60,6 +62,7 @@ export default function CreateDog() {
 
                 <label>Temperaments</label>
                 <select name='temperaments' value={dog.id} onChange={handleChange}>
+                    <option>Select</option>
                     {temperaments?.sort((a, b) => {
                         if ((a.name < b.name) || (a.name || b.name) === '') return -1
                         if (a.name > b.name) return 1
@@ -73,9 +76,16 @@ export default function CreateDog() {
 
                 <label>Image</label>
                 <input name='image' value={dog.image} ></input>
+                <fieldset>
+                    <button type='submit' disabled >Create Dog</button>
+                </fieldset>
+                <fieldset>
+                    <button>Go back</button>
+                </fieldset>
             </form>
-            <button type='submit' disabled >Create Dog</button>
-            <button>Go back</button>
+
+
+
         </div>
     )
 }
