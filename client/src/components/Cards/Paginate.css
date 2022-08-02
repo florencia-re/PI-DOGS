@@ -25,12 +25,7 @@
   
 }
 
-.paginate li button:focus{
-  color:#ddd;
-  background-color: #1A1A1A;
-}
-
-/* .paginate li button:active {
+/* .paginate .btn li button:active {
   color:#ddd;
   background-color: #1A1A1A;
   box-shadow: none;
@@ -40,8 +35,6 @@
   -ms-transform: translateY(0);
   -o-transform: translateY(0);
 } */
-
-/* .paginate li button:hover:not(:active) {background-color: #ddd;} */
 
 .btn {
   margin: 3px;
@@ -58,13 +51,23 @@
 
 .btn:hover {
   color: #ddd;
-  background-color: rgba(43, 40, 40, 0.803);
+  background-color: #1A1A1A;
   transition: background-color .4s;
   transform: translateY(-2px);
   -webkit-transition: background-color .4s;
   -moz-transition: background-color .4s;
   -ms-transition: background-color .4s;
   -o-transition: background-color .4s;
+}
+
+.paginate li button:focus{
+  color:#ddd;
+  background-color: #1A1A1A;
+}
+
+.paginate li button:active {
+  color:#ddd;
+  background-color: #1A1A1A;
 }
 
 .btn:disabled{

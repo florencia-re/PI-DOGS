@@ -24,7 +24,7 @@
   margin-top: 70px;
 }
 
-.button-28 {
+.btn-landing {
   appearance: none;
   background-color: transparent;
   border: 2px solid #1a1a1a;
@@ -53,14 +53,14 @@
   will-change: transform;
 }
 
-.button-28:hover {
+.btn-landing:hover {
   color: #fff;
   background-color: #1a1a1a;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
 
-.button-28:active {
+.btn-landing:active {
   box-shadow: none;
   transform: translateY(0);
 }

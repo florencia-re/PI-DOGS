@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDogs, sortByName, sortByWeight } from "../../redux/actions";
+import { getDogs, sortByName, sortByWeight, filterByTemps, filterByOrigin, getTemperaments } from "../../redux/actions";
 //import { Link } from "react-router-dom";
 import Card from "./Card";
 import './Cards.css'
@@ -13,8 +13,8 @@ import './Paginate.css'
 
 export default function Cards() {
     //pido el estado a redux
-    let allDogs = useSelector(state => state.dogs);
-    //let allDoggie = useSelector(state => state.allDogs)
+    const allDogs = useSelector(state => state.dogs);
+    const allTemperaments = useSelector((state) => state.temperaments)
     const dispatch = useDispatch()
     //hago la logica para ya tener todos los datos cuando el estado se renderize, (return)
 
@@ -30,10 +30,14 @@ export default function Cards() {
         dispatch(getDogs())
     }, [dispatch])
     //console.log(state)
-    
-    const handlerGetDogs = (e) => {
-        dispatch(getDogs())
-    }
+
+    useEffect(() => {
+        dispatch(getTemperaments())
+    }, [dispatch])
+
+    // const handlerGetDogs = (e) => {
+    //     dispatch(getDogs())
+    // }
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -52,27 +56,68 @@ export default function Cards() {
         setOrder(`Ordenado ${e.target.value}`)
     }
 
+    const handlerFilterByTemps = (e) => {
+        //e.target.value -> es el 'option' elegido
+        dispatch(filterByTemps(e.target.value))
+        setCurrentPage(1)
+    }
+
+    const handlerFilterByOrigin = (e) => {
+        dispatch(filterByOrigin(e.target.value))
+        setCurrentPage(1)
+    }
+
+
     return (
         <>
-            <div>
-                <button onClick={(e) => handlerGetDogs(e)}>Charge</button>
+            <div className="container-sort">
+                {/* <div>
+                    <button onClick={(e) => handlerGetDogs(e)}>Charge</button>
+                </div> */}
+
+                {/* ORDENAMIENTOS */}
+                <div>
+                    <h3>Sort by Name:</h3>
+                    <select className="text" onChange={(e) => handlerSortByName(e)}>
+                        <option value="All">Select</option>
+                        <option value="Asc">A - Z</option>
+                        <option value="Desc">Z - A</option>
+                    </select>
+                </div>
+                <div>
+                    <h3>Sort by Weight:</h3>
+                    <select className="text" onChange={(e) => handlerSortByWeight(e)}>
+                        <option value="All">Select</option>
+                        <option value="Light">Lighter to heavier</option>
+                        <option value="Heavy">Heavier to lighter</option>
+                    </select>
+                </div>
+                <div>
+                    {/* FILTRADOS */}
+                    <h3>Filter by Temperament:</h3>
+                    <select className='text' onChange={(e) => handlerFilterByTemps(e)}>
+                        <option value='All'>All</option>
+                        {allTemperaments?.sort((a, b) => {
+                            if ((a.name < b.name) || (a.name || b.name) === '') return -1
+                            if (a.name > b.name) return 1
+                            return 0
+                        }).map((temp) => {
+                            return (
+                                <option key={temp.id} value={temp.name}>{temp.name}</option>)
+                        })
+                        }
+                    </select>
+                </div>
+                <div>
+                    <h3>Filter by Origin (Existing or Created):</h3>
+                    <select className="text" onChange={(e) => handlerFilterByOrigin(e)}>
+                        <option value="All">All</option>
+                        <option value="Created">Created</option>
+                        <option value='Exists'>Exists</option>
+                    </select>
+                </div>
             </div>
-
-            <h3>Sort by Name:</h3>
-            <select onChange={(e) => handlerSortByName(e)}>
-                <option value="All">Select</option>
-                <option value="Asc">A - Z</option>
-                <option value="Desc">Z - A</option>
-            </select>
-
-            <h3>Sort by Weight:</h3>
-
-            <select onChange={(e) => handlerSortByWeight(e)}>
-                <option value="All">Select</option>
-                <option value="Light">Lighter to heavier</option>
-                <option value="Heavy">Heavier to lighter</option>
-            </select>
-
+            {/* CARDS */}
             <div className="container">
                 <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                 <div className='wrapper'>
