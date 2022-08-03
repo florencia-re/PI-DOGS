@@ -54,12 +54,17 @@ const getDbInfo = async () => {
       },
     },
   });
+  // console.log(dbInfo)
   return dbInfo;
+  
 };
+
 
 const getAllDogs = async () => {
   const infoApi = await getApiInfo();
   const infoDb = await getDbInfo();
+  //pulo la info de la db, para q los temperamentos me lleguen como 
+  // string y no como array de objetos
   const DogsDB = infoDb.map((e) => {
     return {
       id: e.id,
