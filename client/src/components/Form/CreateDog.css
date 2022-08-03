@@ -157,3 +157,8 @@ fieldset a {
   border-radius: 4px;
   cursor: pointer;
 }
+
+.error{
+  color: red;
+  font-weight: bold;
+}

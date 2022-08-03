@@ -12,11 +12,11 @@ export default function Details(props) {
     useEffect(() => {
         dispatch(getDetails(id))
     }, [dispatch, id])
+
     let dog = useSelector(state => state.details)
     // console.log(dog)
     return (
         <div className='details'>
-            
             <div className="card-detail">
                 <h2 className="title-detail">Doggie Details</h2>
             {
@@ -26,11 +26,12 @@ export default function Details(props) {
                         <p>Weight between: {dog.weightMin} kg and {dog.weightMax} kg</p>
                         <p>Height between: {dog.heightMin} cm and {dog.heightMax} cm</p>
                         <p>Temperaments: {dog.temperaments}</p>
-                        <img className='img-detail' src={dog.image} alt='doggie' />
+                        <img className='img-detail' 
+                            src={dog.image ? dog.image : 'https://st3.depositphotos.com/6913282/12698/v/600/depositphotos_126982838-stock-illustration-trail-cats-abstract-animal-footprint.jpg'} alt='doggie' />
                         <Link to='/home'><p><button>Go back</button></p></Link>
                     </ul>
                 </div>
-                    : 'Doggie not found'}
+                    : 'Loading doggie'}
             </div>
 
         </div>
