@@ -5,13 +5,16 @@ import { getTemperaments, postDog } from '../../redux/actions';
 import { Link, useHistory } from "react-router-dom";
 import './CreateDog.css';
 
-function validate(dog){
+function validate(dog) {
     let error = {}
-    if(!dog.name){
+    if (!dog.name) {
         error.name = 'Name of the breed is required'
     }
     else if (dog.name.length > 30) {
         error.name = 'The name is too long';
+    }
+    else if (parseInt(dog.name)) {
+        error.name = 'The name cannot contain numbers'
     }
     else if (!dog.heightMin) {
         error.heightMin = 'Minimum height is required';
@@ -55,19 +58,21 @@ function validate(dog){
     else if (dog.weightMax > 170) {
         error.weightMax = 'The weight must be under 200 kgs';
     }
-    else if (!dog.life_span) {
-        error.life_span = 'Life span is required';
+    else if (!dog.lifeSpan) {
+        error.lifeSpan = 'Life span is required';
     }
-    else if (isNaN(parseInt(dog.life_span))) {
-        error.life_span = 'Life span should be a number';
+    else if (isNaN(parseInt(dog.lifeSpan))) {
+        error.lifeSpan = 'Life span should be a number';
     }
-    else if (dog.life_span > 30) {
-        error.life_span = 'Put an appropriate age, the dogs don´t live more than 30 years';
+    else if (dog.lifeSpan > 30) {
+        error.lifeSpan = 'Put an appropriate age, the dogs don´t live more than 30 years';
     }
-    else if (dog.life_span <= 1) {
-        error.life_span = 'The life span don´t be less than 1 year';
+    else if (dog.lifeSpan <= 1) {
+        error.lifeSpan = 'The life span don´t be less than 1 year';
+    } else if (!dog.image.includes("https://") && !dog.image.includes("http://")) {
+        error.image = "This isn't a valid image address";
     }
-return error
+    return error
 }
 
 
@@ -76,11 +81,12 @@ export default function CreateDog() {
     const dispatch = useDispatch()
     //me redirige al home con hisotry.push('/home')
     const history = useHistory()
-
     const temperaments = useSelector(state => state.temperaments)
+
     useEffect(() => {
         dispatch(getTemperaments())
     }, [dispatch])
+
 
     const [error, setError] = useState({})
     const [dog, setDog] = useState({
@@ -107,28 +113,39 @@ export default function CreateDog() {
     }
 
     const handleSelect = (e) => {
-          setDog({
-            ...dog,
-            temperaments: [...dog.temperaments, e.target.value]
-        })  
+        //verifico que no se repitan los temperamentos
+        if (!dog.temperaments.includes(e.target.value)) {
+            setDog({
+                ...dog,
+                temperaments: [...dog.temperaments, e.target.value]
+            })
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(dog)
-        dispatch(postDog(dog))
-        alert('Your doggie was successfully created 🐶')
-        setDog({
-            name: "",
-            heightMin: "",
-            heightMax: "",
-            weightMin: "",
-            weightMax: "",
-            lifeSpan: "",
-            image: "",
-            temperaments: []
-        })
-        history.push('/home')
+
+        //console.log(dog)
+        //console.log(error)
+        //verfico q no haya nada en el objeto de errores y q se completen los datos para despachar
+
+        if (!Object.getOwnPropertyNames(error).length && dog.name && dog.heightMin && dog.heightMax && dog.weightMin && dog.weightMax && dog.lifeSpan && dog.temperaments.length) {
+            dispatch(postDog(dog))
+            alert('Your doggie was successfully created 🐶')
+            setDog({
+                name: "",
+                heightMin: "",
+                heightMax: "",
+                weightMin: "",
+                weightMax: "",
+                lifeSpan: "",
+                image: "",
+                temperaments: []
+            })
+            history.push('/home')
+        } else {
+            alert('You must complete all required fields')
+        }
     }
 
     const handleDeleteTemperament = (e) => {
@@ -146,19 +163,19 @@ export default function CreateDog() {
                 <input type='text' name='name' value={dog.name} onChange={e => handleChange(e)} />
                 {error.name && (<p className='error'>{error.name}</p>)}
                 <label>Minimum Height (centimeters in numbers):</label>
-                <input type='number' name='heightMin' value={dog.heightMin} onChange={e => handleChange(e)} />
+                <input type='text' name='heightMin' value={dog.heightMin} onChange={e => handleChange(e)} />
                 {error.heightMin && (<p className='error'>{error.heightMin}</p>)}
                 <label>Maximum Height (centimeters in numbers):</label>
-                <input type='number' name='heightMax' value={dog.heightMax} onChange={e => handleChange(e)} />
+                <input type='text' name='heightMax' value={dog.heightMax} onChange={e => handleChange(e)} />
                 {error.heightMax && (<p className='error'>{error.heightMax}</p>)}
                 <label>Minimum Weight (kilograms in numbers):</label>
-                <input type='number' name='weightMin' value={dog.weightMin} onChange={e => handleChange(e)} />
+                <input type='text' name='weightMin' value={dog.weightMin} onChange={e => handleChange(e)} />
                 {error.weightMin && (<p className='error'>{error.weightMin}</p>)}
                 <label>Maximum Weight (kilograms in numbers):</label>
-                <input type='number' name='weightMax' value={dog.weightMax} onChange={e => handleChange(e)} />
+                <input type='text' name='weightMax' value={dog.weightMax} onChange={e => handleChange(e)} />
                 {error.weightMax && (<p className='error'>{error.weightMax}</p>)}
                 <label>Life Span (years in numbers):</label>
-                <input type='number' name='lifeSpan' value={dog.lifeSpan} onChange={e => handleChange(e)} />
+                <input type='text' name='lifeSpan' value={dog.lifeSpan} onChange={e => handleChange(e)} />
                 {error.lifeSpan && (<p className='error'>{error.lifeSpan}</p>)}
 
                 <label>Temperaments</label>
@@ -190,7 +207,9 @@ export default function CreateDog() {
                 })}
 
                 <label>Image</label>
-                <input type='file' name='image' value={dog.image} onChange={e => handleChange(e)}></input>
+                <input type='text' name='image' value={dog.image} placeholder="Example: https://..." onChange={e => handleChange(e)}></input>
+                {error.image && (<p className='error'>{error.image}</p>)}
+
                 <fieldset>
                     <button type='submit' className='btn-form-create'>Create Dog</button>
                 </fieldset>
@@ -203,5 +222,3 @@ export default function CreateDog() {
         </div>
     )
 }
-
-//onChange={handleSelect}
