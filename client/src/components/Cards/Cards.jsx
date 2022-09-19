@@ -6,6 +6,7 @@ import { getDogs, sortByName, sortByWeight, filterByTemps, filterByOrigin, getTe
 import Card from "./Card";
 import './Cards.css'
 import Paginate from "./Paginate";
+import Loader from "./../Loader/Loader"
 import './Paginate.css'
 
 //useSelector seleccion uno de los estados en el store, para poder tener acceso al state desde este componente
@@ -29,15 +30,10 @@ export default function Cards() {
     useEffect(() => {
         dispatch(getDogs())
     }, [dispatch])
-    //console.log(state)
 
     useEffect(() => {
         dispatch(getTemperaments())
     }, [dispatch])
-
-    // const handlerGetDogs = (e) => {
-    //     dispatch(getDogs())
-    // }
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -134,7 +130,7 @@ export default function Cards() {
                             </Link>
                         </div>)
 
-                    ) : <h2>Loading...</h2>}
+                    ) : <Loader/>}
                 </div>
                 <Paginate dogsPerPage={dogsPerPage} allDogs={allDogs.length} paginate={paginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
             </div>

@@ -7,6 +7,7 @@ import {
   GET_TEMPERAMENTS,
   SORT_BY_NAME,
   POST_DOG,
+  CLEAR_STATE
 } from "./actionTypes";
 
 const initialState = {
@@ -100,6 +101,12 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+    
+    case CLEAR_STATE:
+      return {
+        ...state,
+        details: []
+      }
 
     default:
       return {

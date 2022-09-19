@@ -8,6 +8,7 @@ import {
   SORT_BY_WEIGHT,
   SORT_BY_NAME,
   //POST_DOG
+  CLEAR_STATE
 } from "./actionTypes";
 
 export function getDogs(name) {
@@ -103,3 +104,10 @@ export function postDog(payload) {
     //   console.log("Error ocurred");
     //   //payload({type: ERROR_OCURRED, payload: error.toString()})
     // }
+
+export function clearState(payload) {
+  return {
+    type: CLEAR_STATE,
+    payload,
+  };
+}

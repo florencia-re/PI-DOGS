@@ -4,7 +4,7 @@ import './LandingPage.css'
 
 export default function LandingPage(){
     return(
-        <div>
+        <>
             <div className='landing'>
                 <div>
                     <h1>Doggie Web App</h1>
@@ -15,7 +15,7 @@ export default function LandingPage(){
                 </Link>
                 <div id='imagen'></div>
             </div>
-        </div>
+        </>
     );
 }
 
