@@ -211,7 +211,7 @@ export default function CreateDog() {
                 {error.image && (<p className='error'>{error.image}</p>)}
 
                 <fieldset>
-                    <button type='submit' className='btn-form-create'>Create Dog</button>
+                    <button type='submit' className='btn-form-create' disabled={!Object.getOwnPropertyNames(error).length ? false : true}>Create Dog</button>
                 </fieldset>
                 <fieldset>
                     <Link to='/home'>

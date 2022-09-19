@@ -21,7 +21,7 @@ export default function Cards() {
     //----  Paginado  ----
     const [currentPage, setCurrentPage] = useState(1);
     const [/*order*/, setOrder] = useState('')
-    const [dogsPerPage] = useState(8);
+    const [dogsPerPage] = useState(9);
     const lastDog = currentPage * dogsPerPage;
     const firstDog = lastDog - dogsPerPage;
     const currentDogs = allDogs.slice(firstDog, lastDog)

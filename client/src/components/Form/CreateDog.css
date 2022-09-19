@@ -1,6 +1,5 @@
 .div-form {
   width: 100%;
-
   /* margin: 0; */
   background-image: url("../../Images/Diseño\ sin\ título.png");
   background-size: cover;
@@ -32,7 +31,6 @@ fieldset {
   width: 100%;
   min-height: 2em;
   border-radius: 8px;
-
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
@@ -51,9 +49,11 @@ fieldset {
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
 }
+
 .form select {
   margin: 10px 0 0 0;
-  width: 100%;
+  padding: 1%;
+  width: 105%;
   min-height: 2em;
   border-radius: 8px;
   border: 1px solid #393939;
@@ -69,6 +69,8 @@ fieldset {
 .form input,
 textarea {
   background-color: #393939;
+  padding-left: 2%;
+  padding-right: 2%;
   border: 1px solid #000000;
   color: #ffffff;
 }
@@ -134,19 +136,13 @@ fieldset a {
 }
 
 .temp-select {
-  display: inline-flex;
   grid-template-columns: repeat(2, 1fr);
-  /* border: 2px solid #1a1a1a; */
   font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   width: 10rem;
   height: 3rem;
   align-items: center;
-}
-
-.temp-select div {
-  display: inline;
-  margin: 10px;
+  justify-self: center;
 }
 
 .x {
@@ -158,21 +154,23 @@ fieldset a {
   cursor: pointer;
 }
 
-.error{
+.error {
   color: red;
   font-weight: bold;
 }
 
-.btn-form-create:disabled{
-  color: #808B96;
+.btn-form-create[type="submit"]:disabled:hover {
+  color: #808b96;
   border: none;
   transform: none;
+  cursor: not-allowed;
+  box-shadow: none;
+  
   -webkit-transform: none;
   -moz-transform: none;
   -ms-transform: none;
   -o-transform: none;
 }
-
 
 .btn-form-create:disabled:hover {
   /* background-color: transparent; */
@@ -180,5 +178,5 @@ fieldset a {
   cursor: not-allowed;
   border: none;
   box-shadow: none;
-  color:#808B96;
+  color: #808b96;
 }
