@@ -7,6 +7,7 @@ import './CreateDog.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import NavBar from '../NavBar/NavBar';
+import Footer from '../Footer/Footer';
 
 function validate(dog) {
     let error = {}
@@ -228,6 +229,8 @@ export default function CreateDog() {
                         </Link>
                     </fieldset>
                 </form>
-            </div></>
+            </div>
+            <Footer />
+            </>
     )
 }

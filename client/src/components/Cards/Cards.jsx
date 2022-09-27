@@ -10,6 +10,7 @@ import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Footer from "./../Footer/Footer";
 import "./Cards.css"
 import "./Paginate.css";
 
@@ -156,6 +157,7 @@ export default function Cards() {
                     ) : <Loader />}
                 </Row>
             </div>
+            <Footer />
         </>
     )
 }
