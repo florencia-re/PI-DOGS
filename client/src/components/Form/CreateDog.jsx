@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getTemperaments, postDog } from '../../redux/actions';
 import { Link, useHistory } from "react-router-dom";
 import './CreateDog.css';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import NavBar from '../NavBar/NavBar';
 
 function validate(dog) {
     let error = {}
@@ -156,69 +159,75 @@ export default function CreateDog() {
     }
 
     return (
-        <div className='div-form'>
-            <h3>Create a New Doggie!</h3>
-            <form className='form' onSubmit={e => handleSubmit(e)}>
-                <label>Name</label>
-                <input type='text' name='name' value={dog.name} onChange={e => handleChange(e)} />
-                {error.name && (<p className='error'>{error.name}</p>)}
-                <label>Minimum Height (centimeters in numbers):</label>
-                <input type='text' name='heightMin' value={dog.heightMin} onChange={e => handleChange(e)} />
-                {error.heightMin && (<p className='error'>{error.heightMin}</p>)}
-                <label>Maximum Height (centimeters in numbers):</label>
-                <input type='text' name='heightMax' value={dog.heightMax} onChange={e => handleChange(e)} />
-                {error.heightMax && (<p className='error'>{error.heightMax}</p>)}
-                <label>Minimum Weight (kilograms in numbers):</label>
-                <input type='text' name='weightMin' value={dog.weightMin} onChange={e => handleChange(e)} />
-                {error.weightMin && (<p className='error'>{error.weightMin}</p>)}
-                <label>Maximum Weight (kilograms in numbers):</label>
-                <input type='text' name='weightMax' value={dog.weightMax} onChange={e => handleChange(e)} />
-                {error.weightMax && (<p className='error'>{error.weightMax}</p>)}
-                <label>Life Span (years in numbers):</label>
-                <input type='text' name='lifeSpan' value={dog.lifeSpan} onChange={e => handleChange(e)} />
-                {error.lifeSpan && (<p className='error'>{error.lifeSpan}</p>)}
+        <>
+            <NavBar />
+            <div className='div-form'>
 
-                <label>Temperaments</label>
-                <select name='temperaments' onChange={e => handleSelect(e)}>
-                    <option>Select</option>
-                    {temperaments?.sort((a, b) => {
-                        if ((a.name < b.name) || (a.name || b.name) === '') return -1
-                        if (a.name > b.name) return 1
-                        return 0
-                    }).map((temp) => {
-                        return (
-                            <option key={temp.id} value={temp.name}>{temp.name}</option>)
-                    })
-                    }
-                </select>
+                <h3 className='my-2'>Create a New Doggie!</h3>
+                <form className='form text-start' onSubmit={e => handleSubmit(e)}>
+                    <label>Name</label>
+                    <input type='text' name='name' value={dog.name} onChange={e => handleChange(e)} />
+                    {error.name && (<p className='error text-warning mt-1'>{error.name}</p>)}
+                    <label>Minimum Height (centimeters in numbers):</label>
+                    <input type='text' name='heightMin' value={dog.heightMin} onChange={e => handleChange(e)} />
+                    {error.heightMin && (<p className='error text-warning mt-1'>{error.heightMin}</p>)}
+                    <label>Maximum Height (centimeters in numbers):</label>
+                    <input type='text' name='heightMax' value={dog.heightMax} onChange={e => handleChange(e)} />
+                    {error.heightMax && (<p className='error text-warning mt-1'>{error.heightMax}</p>)}
+                    <label>Minimum Weight (kilograms in numbers):</label>
+                    <input type='text' name='weightMin' value={dog.weightMin} onChange={e => handleChange(e)} />
+                    {error.weightMin && (<p className='error text-warning mt-1'>{error.weightMin}</p>)}
+                    <label>Maximum Weight (kilograms in numbers):</label>
+                    <input type='text' name='weightMax' value={dog.weightMax} onChange={e => handleChange(e)} />
+                    {error.weightMax && (<p className='error text-warning mt-1'>{error.weightMax}</p>)}
+                    <label>Life Span (years in numbers):</label>
+                    <input type='text' name='lifeSpan' value={dog.lifeSpan} onChange={e => handleChange(e)} />
+                    {error.lifeSpan && (<p className='error text-warning mt-1'>{error.lifeSpan}</p>)}
 
-                {/* <span>{dog.temperaments.map(temp => temp + ', ')}</span> */}
+                    <label>Temperaments</label>
+                    <select name='temperaments' onChange={e => handleSelect(e)}>
+                        <option>Select</option>
+                        {temperaments?.sort((a, b) => {
+                            if ((a.name < b.name) || (a.name || b.name) === '') return -1
+                            if (a.name > b.name) return 1
+                            return 0
+                        }).map((temp) => {
+                            return (
+                                <option key={temp.id} value={temp.name}>{temp.name}</option>)
+                        })
+                        }
+                    </select>
 
-                {dog.temperaments.map(el => {
-                    return (
-                        <div className='temp-select' key={el}>
-                            <div>
-                                <p className='temp-p'><strong>{el}</strong></p></div>
-                            <div>
-                                <button onClick={() => handleDeleteTemperament(el)} className='x' >x</button>
-                            </div>
-                        </div>
-                    )
-                })}
+                    {/* <span>{dog.temperaments.map(temp => temp + ', ')}</span> */}
+                    <Row xs={1} md={3} className="g-1 mt-1">
+                        {dog.temperaments.map(el => {
+                            return (
 
-                <label>Image</label>
-                <input type='text' name='image' value={dog.image} placeholder="Example: https://..." onChange={e => handleChange(e)}></input>
-                {error.image && (<p className='error'>{error.image}</p>)}
+                                <Col>
+                                    <div className='container text-center' key={el}>
+                                        <div>
+                                            <p><strong>{el}</strong></p></div>
+                                        <div>
+                                            <button onClick={() => handleDeleteTemperament(el)} className='x' >x</button>
+                                        </div>
+                                    </div>
+                                </Col>
+                            )
+                        })}</Row>
 
-                <fieldset>
-                    <button type='submit' className='btn-form-create' disabled={!Object.getOwnPropertyNames(error).length ? false : true}>Create Dog</button>
-                </fieldset>
-                <fieldset>
-                    <Link to='/home'>
-                        <button className='btn-form-back'>Go back</button>
-                    </Link>
-                </fieldset>
-            </form>
-        </div>
+                    <label>Image</label>
+                    <input type='text' name='image' value={dog.image} placeholder="Example: https://..." onChange={e => handleChange(e)}></input>
+                    {error.image && (<p className='error'>{error.image}</p>)}
+
+                    <fieldset>
+                        <button type='submit' className='btn-form-create' disabled={!Object.getOwnPropertyNames(error).length ? false : true}>Create Dog</button>
+                    </fieldset>
+                    <fieldset>
+                        <Link to='/home'>
+                            <button className='btn-form-back'>Go back</button>
+                        </Link>
+                    </fieldset>
+                </form>
+            </div></>
     )
 }

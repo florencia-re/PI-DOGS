@@ -1,0 +1,15 @@
+.cardDog {
+  border-radius: 2%;
+  border: 1px solid #393939;
+}
+
+.cardDog:hover {
+    box-shadow: 8px 8px 8px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    border-radius: 2%;
+    -webkit-border-radius: 2%;
+    -moz-border-radius: 2%;
+    -ms-border-radius: 2%;
+    -o-border-radius: 2%;
+}
+

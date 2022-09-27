@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearState, getDetails } from "../../redux/actions";
 import { Link } from 'react-router-dom';
+import Loader from "../Loader/Loader";
 import './Details.css';
+import NavBar from "../NavBar/NavBar";
+import Footer from "./../Footer/Footer"
 
 export default function Details(props) {
 
@@ -17,13 +20,16 @@ export default function Details(props) {
     let dog = useSelector(state => state.details)
 
     return (
+        <>
+        <NavBar/>
         <div className='details'>
             <div className="card-detail">
-                <h2 className="title-detail">Doggie Details</h2>
+                <h3 className="title-detail mt-3">Doggie Details</h3>
                 {
                     dog?.id ? <div className="div-detail">
                         <ul id="card-content">
                             <h3>{dog.name}</h3>
+                            <br/>
                             <p>Weight between: {dog.weightMin} kg and {dog.weightMax} kg</p>
                             <p>Height between: {dog.heightMin} cm and {dog.heightMax} cm</p>
                             <p>Temperaments: {dog.temperaments}</p>
@@ -32,9 +38,10 @@ export default function Details(props) {
                             <Link to='/home'><p><button>Go back</button></p></Link>
                         </ul>
                     </div>
-                        : <h3>Cargando...</h3>}
+                        : <Loader />}
             </div>
-
         </div>
+        <Footer />
+        </>
     )
 }

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getDogs } from "../../redux/actions";
-import './SearchBar.css'
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl';
 
 export default function SearchBar() {
 
@@ -23,17 +25,21 @@ export default function SearchBar() {
     }
 
     return (
-        <div>
-            <input
-                type="text"
-                placeholder="Write a breed 🐶"
-                onChange={e => handleInputChange(e)}
-                onKeyPress={e => e.key === 'Enter' && handleSubmit(e)}
-                value={name}
-                className='text'
+        <>
+            <Form className="d-flex">
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="me-1 ms-2"
+              aria-label="Search"
+              onChange={e => handleInputChange(e)}
+              onKeyPress={e => e.key === 'Enter' && handleSubmit(e)}
+              value={name}
             />
-            <button className='btn-search' type='Submit' onClick={e => handleSubmit(e)}>Search</button>
             
-        </div>
+            <Button className="ms-2 me-2" variant="success" onClick={e => handleSubmit(e)}>Search</Button>
+           
+          </Form>
+        </>
     )
 }
